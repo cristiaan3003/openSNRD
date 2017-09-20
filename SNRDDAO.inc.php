@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file plugins/generic/snrd/SNRDDAO.inc.php
+ *
+ * Copyright (c) 2013-2016 Simon Fraser University Library
+ * Copyright (c) 2003-2016 John Willinsky
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ *
+ * @class SNRDDAO
+ * @ingroup plugins_generic_snrd
+ *
+ * @brief DAO operations for SNRD.
+ */
+
+import('classes.oai.ojs.OAIDAO');
+
+
+class SNRDDAO extends OAIDAO {
+
+	/**
+	 * Constructor.
+	 */
+	function SNRDDAO() {
+		parent::OAIDAO();
+	}
+
+	/**
+	 * Set parent OAI object.
+	 * @param JournalOAI
+	 */
+	function setOAI(&$oai) {
+		$this->oai = $oai;
+	}
+
+	//
+	// Records
+	//
+
+	/**
+	 * Return set of OAI records or identifiers matching specified parameters.
+	 * @param $setIds array Objects ids that specify an OAI set, in this case only journal ID.
+	 * @param $from int timestamp
+	 * @param $until int timestamp
+	 * @param $offset int
+	 * @param $limit int
+	 * @param $total int
+	 * @param $funcName string
+	 * @return array OAIRecord
+	 */
+	function &getSNRDRecordsOrIdentifiers($setIds, $from, $until, $offset, $limit, &$total, $funcName) {
+		$records = array();
+
+		$result =& $this->_getRecordsRecordSet($setIds, $from, $until, null);
+
+		$total = $result->RecordCount();
+
+		$result->Move($offset);
+		for ($count = 0; $count < $limit && !$result->EOF; $count++) {
+			$row =& $result->GetRowAssoc(false);
+			$record =& $this->$funcName($row);
+			if(in_array('snrd', $record->sets)){
+				$records[] =& $record;
+			}
+			$result->moveNext();
+			unset($record, $row);
+		}
+
+		$result->Close();
+		unset($result);
+
+		return $records;
+	}
+
+}
+
+?>
