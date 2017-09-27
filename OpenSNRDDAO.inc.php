@@ -71,13 +71,13 @@ class OpenSNRDDAO extends OAIDAO {
 	}
 
 	/**
-	 * Check if it's an OpenSNRD record, if it contains projectID.
+	 * Check if it's an OpenSNRD record, if it contains snrdID.
 	 * @param $row array of database fields
 	 * @return boolean
 	 */
 	function isOpenSNRDRecord($row) {
 		if (!isset($row['tombstone_id'])) {
-			$params = array('projectID', (int) $row['article_id']);
+			$params = array('snrdID', (int) $row['article_id']);
 			$result =& $this->retrieve(
 				'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value IS NOT NULL AND setting_value <> \'\' AND article_id = ?',
 				$params
@@ -94,12 +94,12 @@ class OpenSNRDDAO extends OAIDAO {
 	}
 
 	/**
-	 * Check if it's an OpenSNRD article, if it contains projectID.
+	 * Check if it's an OpenSNRD article, if it contains snrdID.
 	 * @param $articleId int
 	 * @return boolean
 	 */
 	function isOpenSNRDArticle($articleId) {
-		$params = array('projectID', (int) $articleId);
+		$params = array('snrdID', (int) $articleId);
 		$result =& $this->retrieve(
 			'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value IS NOT NULL AND setting_value <> \'\' AND article_id = ?',
 			$params

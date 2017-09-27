@@ -88,75 +88,75 @@ class OpenSNRDPlugin extends GenericPlugin {
 	 */
 
 	/**
-	 * Insert projectID field into author submission step 3 and metadata edit form
+	 * Insert snrdID field into author submission step 3 and metadata edit form
 	 */
 	function metadataFieldEdit($hookName, $params) {
 		$smarty =& $params[1];
 		$output =& $params[2];
 
-		$output .= $smarty->fetch($this->getTemplatePath() . 'projectIDEdit.tpl');
+		$output .= $smarty->fetch($this->getTemplatePath() . 'snrdIDEdit.tpl');
 		return false;
 	}
 
 	/**
-	 * Add projectID to the metadata view
+	 * Add snrdID to the metadata view
 	 */
 	function metadataFieldView($hookName, $params) {
 		$smarty =& $params[1];
 		$output =& $params[2];
 
-		$output .= $smarty->fetch($this->getTemplatePath() . 'projectIDView.tpl');
+		$output .= $smarty->fetch($this->getTemplatePath() . 'snrdIDView.tpl');
 		return false;
 	}
 
 	/**
-	 * Add projectID element to the article
+	 * Add snrdID element to the article
 	 */
 	function articleSubmitGetFieldNames($hookName, $params) {
 		$fields =& $params[1];
-		$fields[] = 'projectID';
+		$fields[] = 'snrdID';
 		return false;
 	}
 
 	/**
-	 * Set article projectID
+	 * Set article snrdID
 	 */
 	function metadataExecute($hookName, $params) {
 		$form =& $params[0];
 		$article =& $form->article;
-		$formProjectID = $form->getData('projectID');
-		$article->setData('projectID', $formProjectID);
+		$formProjectID = $form->getData('snrdID');
+		$article->setData('snrdID', $formProjectID);
 		return false;
 	}
 
 	/**
-	 * Add check/validation for the projectID field (= 6 numbers)
+	 * Add check/validation for the snrdID field (= 6 numbers)
 	 */
 	function addCheck($hookName, $params) {
 		$form =& $params[0];
 		if (get_class($form) == 'AuthorSubmitStep3Form' || get_class($form) == 'MetadataForm' ) {
-			$form->addCheck(new FormValidatorRegExp($form, 'projectID', 'optional', 'plugins.generic.openSNRD.projectIDValid', '/^\d{6}$/'));
+			$form->addCheck(new FormValidatorRegExp($form, 'snrdID', 'optional', 'plugins.generic.openSNRD.snrdIDValid', '/^\d{6}$/'));
 		}
 		return false;
 	}
 
 	/**
-	 * Init article projectID
+	 * Init article snrdID
 	 */
 	function metadataInitData($hookName, $params) {
 		$form =& $params[0];
 		$article =& $form->article;
-		$articleProjectID = $article->getData('projectID');
-		$form->setData('projectID', $articleProjectID);
+		$articleProjectID = $article->getData('snrdID');
+		$form->setData('snrdID', $articleProjectID);
 		return false;
 	}
 
 	/**
-	 * Concern projectID field in the form
+	 * Concern snrdID field in the form
 	 */
 	function metadataReadUserVars($hookName, $params) {
 		$userVars =& $params[1];
-		$userVars[] = 'projectID';
+		$userVars[] = 'snrdID';
 		return false;
 	}
 
@@ -233,7 +233,7 @@ class OpenSNRDPlugin extends GenericPlugin {
 
 			// Determine OpenSNRD DC elements values
 			// OpenSNRD DC Relation
-			$articleProjectID = $article->getData('projectID');
+			$articleProjectID = $article->getData('snrdID');
 			$openSNRDRelation = $articleProjectID;
 
 			// OpenSNRD DC Rights

@@ -15,8 +15,8 @@
 <locale name="es_ES" full_name="Español">
 	<message key="plugins.generic.openSNRD.displayName">OpenSNRD</message>
 	<message key="plugins.generic.openSNRD.description">El módulo OpenSNRD añade el elemento "ArticuloID SNRD" (identificación del articulo) a los metadatos del artículo y extiende la interfaz del protocolo OAI-PMH según las Directrices SNRD , y así facilita que las revistas del OJS sean compatibles con SNRD.</message>
-	<message key="plugins.generic.openSNRD.projectID">Identificación del artículo</message>
+	<message key="plugins.generic.openSNRD.snrdID">Identificación del artículo</message>
 	<message key="plugins.generic.openSNRD.metadata">Metadatos específicos de SNRD (introducir ID:100000)</message>
-	<message key="plugins.generic.openSNRD.projectID.description">(La identificación del proyecto equivale al número del acuerdo de acceso)</message>
-	<message key="plugins.generic.openSNRD.projectIDValid">Introduzca una identificación de proyecto para SNRD válida (ID:100000)</message>
+	<message key="plugins.generic.openSNRD.snrdID.description">(La identificación del proyecto equivale al número del acuerdo de acceso)</message>
+	<message key="plugins.generic.openSNRD.snrdIDValid">Introduzca una identificación de proyecto para SNRD válida (ID:100000)</message>
 </locale>
