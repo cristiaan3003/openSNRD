@@ -79,10 +79,10 @@ class OpenSNRDDAO extends OAIDAO {
 		if (!isset($row['tombstone_id'])) {
 			$params = array('snrdID', (int) $row['article_id']);
 			$result =& $this->retrieve(
-				'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value IS NOT NULL AND setting_value <> \'\' AND article_id = ?',
+				'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value = \'100000\' AND setting_value <> \'\' AND article_id = ?',
 				$params
 			);
-			$returner = (isset($result->fields[0]) && $result->fields[0] == 1) ? true : false;
+			$returner = (isset($result->fields[0]) && $result->fields[0] == 0) ? true : false;
 			$result->Close();
 			unset($result);
 
@@ -101,10 +101,10 @@ class OpenSNRDDAO extends OAIDAO {
 	function isOpenSNRDArticle($articleId) {
 		$params = array('snrdID', (int) $articleId);
 		$result =& $this->retrieve(
-			'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value IS NOT NULL AND setting_value <> \'\' AND article_id = ?',
+			'SELECT COUNT(*) FROM article_settings WHERE setting_name = ? AND setting_value = \'100000\' AND setting_value <> \'\' AND article_id = ?',
 			$params
 		);
-		$returner = (isset($result->fields[0]) && $result->fields[0] == 1) ? true : false;
+		$returner = (isset($result->fields[0]) && $result->fields[0] == 0) ? true : false;
 		$result->Close();
 		unset($result);
 

@@ -18,6 +18,7 @@ import('lib.pkp.classes.plugins.GenericPlugin');
 
 class OpenSNRDPlugin extends GenericPlugin {
 
+	
 	/**
 	 * Called as a plugin is registered to the registry
 	 * @param $category String Name of category plugin was registered to
@@ -74,6 +75,16 @@ class OpenSNRDPlugin extends GenericPlugin {
 		}
 		return $success;
 	}
+	
+	
+	/**
+	* @see PKPPlugin::isSitePlugin()
+	*/
+	function isSitePlugin() {
+		// This is a site-wide plugin.
+		return true;
+	}
+	
 
 	function getDisplayName() {
 		return __('plugins.generic.openSNRD.displayName');
@@ -197,12 +208,13 @@ class OpenSNRDPlugin extends GenericPlugin {
 				$funcName = '_returnIdentifierFromRow';
 			}
 			$journalId = $journalOAI->journalId;
-			$records = $openSNRDDao->getOpenSNRDRecordsOrIdentifiers(array($journalId, null), $from, $until, $offset, $limit, $total, $funcName);
+
+			$records = $openSNRDDao->getOpenSNRDRecordsOrIdentifiers(array($journalId,null), $from, $until, $offset, $limit, $total, $funcName);
 			return true;
 		}
 		return false;
 	}
-
+	
 	/**
 	 * Change OAI record or identifier to consider the OpenSNRD set
 	 */

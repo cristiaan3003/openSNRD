@@ -16,8 +16,8 @@
 	<td rowspan="2" width="20%" class="label">{fieldLabel name="snrdID" key="plugins.generic.openSNRD.snrdID"}</td>
 	<td width="80%" class="value"><input type="text" class="textField" name="snrdID" id="snrdID" value="{$snrdID|escape}" size="5" maxlength="10" /></td>
 </tr>
-<tr valign="top">
-	<td><span class="instruct">{translate key="plugins.generic.openSNRD.snrdID.description"}</span></td>
+<tr valign="top" >
+	<td style="color: red; font-weight: bold;"><span >{translate key="plugins.generic.openSNRD.snrdID.description"}</span></td>
 </tr>
 </table>
 </div>
